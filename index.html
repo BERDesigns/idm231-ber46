@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.typekit.net/gvl1eye.css">
+    <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="anim.css">
+    <title>Nefari'us</title>
+  </head>
+  <body>
+    <p class="title center text-flicker-and-push">NEFARI'US</p>
+    <div class="starting-content">
+      <p class="center fade-in" id="description-text"><br /><br /><br /><br /><br /><br /><br /><br /><br />WHICH NOTORIOUS CRIMINAL MASTERMIND ARE YOU?</p>
+      <div class="center fade-in" id="formbox">
+        <div id="dob-form" class="child">
+          <label id="month-label">WHAT MONTH WERE YOU BORN?</label>
+            <select id = "month-list">
+              <option value = "1">JAN</option>
+              <option value = "2">FEB</option>
+              <option value = "3">MAR</option>
+              <option value = "4">APR</option>
+              <option value = "5">MAY</option>
+              <option value = "6">JUN</option>
+              <option value = "7">JUL</option>
+              <option value = "8">AUG</option>
+              <option value = "9">SEP</option>
+              <option value = "10">OCT</option>
+              <option value = "11">NOV</option>
+              <option value = "12">DEC</option>
+            </select>
+          <br /><br />
+          <label id="day-label">WHAT DAY WERE YOU BORN?</label>
+          <br />
+            <input type="number" id="day-select" name="day-select" value="1" min="1" max="31">
+          <br /><br />
+          <a href="#" class="btn" id="submit-btn">SUBMIT</a>
+        </div>
+        <div class="vl"></div>
+        <div id="explore" class="child">
+          <label>OR...FEEL FREE TO EXPLORE THE<br />PROGRAM WITHOUT ENTERING<br />YOUR B-DAY.</label>
+          <br /><br />
+          <a href="#" class="btn" id="explore-btn">EXPLORE</a>
+        </div>
+      </div>
+    </div>
+    <div class="on-click-content">
+      <div class="gridbox" id="grd-01">
+        <div class="sign-info">
+          <p class="sign-name"></P>
+          <p class="criminal-name"></P>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src = "js/main.js"></script>
+  </body>
+</html>

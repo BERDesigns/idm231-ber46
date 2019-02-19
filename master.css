@@ -1,0 +1,278 @@
+html {
+  /*--title-color: 247,61,40;
+  --title-depth-color: 172,42,28;*/
+
+  --title-color: 240, 240, 240;
+  --title-depth-color: 176, 176, 176;
+
+  background-color: #000;
+
+
+  animation: background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
+
+  font-family: "futura-pt" !important;
+  color: rgba(var(--title-color), 1);
+  font-size: 100%;
+}
+
+.title {
+  font-family: "futura-pt-bold" !important;
+  font-size: 600%;
+
+  z-index: 5;
+}
+
+.center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  text-align: center;
+
+  margin: auto;
+}
+
+.text-flicker-and-push {
+	animation: text-flicker-in-glow 4s linear 1s both, text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 5.5s both;
+}
+
+.fade-in {
+  animation: fade-in 1s linear 7s both;
+}
+
+.fade-in-no-delay {
+  animation: fade-in 1s linear 2s both;
+}
+
+.fade-out {
+  animation: fade-out 1s linear 0.5s both;
+}
+
+.move-up {
+  animation: push-upward 1s linear 0.3s both;
+}
+
+.child {
+  width: 45%;
+}
+
+#description-text {
+  top: 8%;
+
+  font-size: 150%;
+}
+
+#formbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+
+  width: 55%;
+  height: 40%;
+
+  font-size: 150%;
+
+  background-color: rgba(var(--title-color), 0.3);
+
+  border-radius: 25px 100px;
+  border-style: dashed;
+  border-color: rgba(var(--title-color), 1);
+  border-width: thick;
+
+  z-index: 10;
+}
+
+#month-label {
+  padding-bottom: 10px;
+}
+
+#day-label {
+  padding-bottom: 10px;
+}
+
+#month-list {
+  padding: 5px 5px 5px 10px;
+  background: rgba(var(--title-color), 0.8);
+  border: rgba(var(--title-color), 0.3);
+  border-radius: 50px;
+  width: 60%;
+
+  overflow: hidden;
+  position: relative;
+}
+
+#day-select {
+  padding: 5px 5px 5px 10px;
+  background: rgba(var(--title-color), 0.8);
+  border: rgba(var(--title-color), 0.3);
+  border-radius: 50px;
+  width: 60%;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.btn {
+  color: rgba(var(--title-color), 1);
+  padding: 2% 6%;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  font-size: 80%;
+
+  border: 3px;
+  border-style: solid;
+  border-color: rgba(var(--title-color), 1);
+  border-radius: 50px;
+
+  transition: 0.5s ease;
+}
+
+.btn:hover {
+  background-color: rgba(var(--title-color), 0.5);
+}
+
+.vl {
+  height: 80%;
+
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(var(--title-color), 0.8);
+}
+
+.on-click-content {
+  opacity: 0;
+}
+
+.gridbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-42%);
+
+    text-align: center;
+
+    margin: auto;
+
+    height: 80%;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+        ". btn-11 btn-0 btn-1 ."
+        "btn-10 sign-info sign-info sign-info btn-2"
+        "btn-9 sign-info sign-info sign-info btn-3"
+        "btn-8 sign-info sign-info sign-info btn-4"
+        ". btn-7 btn-6 btn-5 .";
+
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    transition: 0.75s ease;
+}
+
+.sign-btn {
+  width: 75%;
+}
+
+.sign {
+  width: 100%;
+  opacity: 0.5;
+
+  filter: grayscale(50%);
+
+  border: 5px solid #DDD;
+  border-radius: 50%;
+
+  position: relative;
+  display: block;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.sign:hover {
+  border: 5px solid white;
+  opacity: 0.8;
+
+  filter: grayscale(25%);
+}
+
+.is-selected {
+  width: 100%;
+  opacity: 1;
+
+  filter: grayscale(0%);
+
+  border: 5px solid white;
+  border-radius: 50%;
+
+  position: relative;
+  display: block;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.sign-info {
+  grid-area: sign-info;
+  transition: 0.75s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.sign-name {
+  font-size: 200%;
+  margin: 0;
+  padding: 0;
+}
+
+.criminal-name {
+  font-family: "futura-pt-bold" !important;
+  font-size: 400%;
+  margin: 0;
+  padding: 0;
+}
+
+#btn-11 {
+  transform: translateY(25%);
+}
+
+#btn-1 {
+  transform: translateY(25%);
+}
+
+#btn-2 {
+  transform: translateX(-25%);
+}
+
+#btn-4 {
+  transform: translateX(-25%);
+}
+
+#btn-5 {
+  transform: translateY(-25%);
+}
+
+#btn-7 {
+  transform: translateY(-25%);
+}
+
+#btn-8 {
+  transform: translateX(25%);
+}
+
+#btn-10 {
+  transform: translateX(25%);
+}
+
+.push-left {
+  transform: translate(-110%, -42%);
+}
