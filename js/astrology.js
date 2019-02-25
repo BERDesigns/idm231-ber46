@@ -58,7 +58,7 @@ function getSign(month, day) {
   return sign;
 }
 
-function sign(starsign, name, sound, image, description, isSelected) {
+function sign(starsign, name, sound, image, description, isSelected, dates) {
 this.starsign = starsign;
   this.name = name;
   this.sound = `sounds/${sound}.mp3`;
@@ -66,6 +66,7 @@ this.starsign = starsign;
   this.image = `icons/${image}.png`;
   this.description = description;
   this.isSelected = false;
+  this.dates = dates;
   this.playSound = function() {
     console.log("playSound running correctly for "+name);
   };
@@ -98,104 +99,117 @@ const cap = new sign(
   "H.H. Holmes",
   "temp",
   "holmes",
-  "Lorem ipsum...",
-  false
+  "As a Capricorn, you are lorem ipsum...",
+  false,
+  "Dec 22 - Jan 19"
 );
 const sag = new sign(
   "Sagittarius",
   "John Gotti",
   "temp",
   "gotti",
-  "Lorem ipsum...",
-  false
+  "As a Sagittarius, you are lorem ipsum...",
+  false,
+  "Nov 22 - Dec 21"
 );
 const sco = new sign(
   "Scorpio",
-  "Dragan Mikic & Pink Panthers",
+  "Dragan Mikic",
   "temp",
   "mikic",
-  "Lorem ipsum...",
-  false
+  "Leader of The Pink Panthers.",
+  false,
+  "Oct 23 - Nov 21"
 );
 const lib = new sign(
   "Libra",
   "Jim Jones",
   "temp",
   "jones",
-  "Lorem ipsum...",
-  false
+  "As a Libra, you are lorem ipsum...",
+  false,
+  "Sep 23 - Oct 22"
 );
 const vir = new sign(
   "Virgo",
   "Belle Gunness",
   "temp",
   "gunness",
-  "Lorem ipsum...",
-  false
+  "As a Virgo, you are lorem ipsum...",
+  false,
+  "Aug 23 - Sep 22"
 );
 const leo = new sign(
   "Leo",
-  "Peter Salerno & The Dinner Set Gang",
+  "Peter Salerno",
   "temp",
   "salerno",
-  "Lorem ipsum...",
-  false
+  "Leader of The Dinner Set Gang.",
+  false,
+  "Jul 23 - Aug 22"
 );
 const can = new sign(
   "Cancer",
   "Billy the Kid",
   "temp",
   "kid",
-  "Lorem ipsum...",
-  false
+  "As a Cancer, you are lorem ipsum...",
+  false,
+  "Jun 21 - Jul 22"
 );
 const gem = new sign(
   "Gemini",
   "Bonnie & Clyde",
   "temp",
   "bac",
-  "Lorem ipsum...",
-  false
+  "As a Gemini, you are lorem ipsum...",
+  false,
+  "May 21 - Jun 20"
 );
 const tau = new sign(
   "Taurus",
-  "Alice Diamond & Forty Elephants",
+  "Alice Diamond",
   "temp",
   "diamond",
-  "Lorem ipsum...",
-  false
+  "Leader of the Fourty Elephants.",
+  false,
+  "Apr 20 - May 20"
 );
 const ari = new sign(
   "Aries",
   "Al Capone",
   "temp",
   "capone",
-  "Lorem ipsum...",
-  false
+  "As a Aries, you are lorem ipsum...",
+  false,
+  "Mar 21 - Apr 19"
 );
 const pis = new sign(
   "Pisces",
   "Charles Manson",
   "temp",
   "manson",
-  "Lorem ipsum...",
-  false
+  "As a Pisces, you are lorem ipsum...",
+  false,
+  "Feb 19 - Mar 20"
 );
 const aqu = new sign(
   "Aquarius",
   "Jack the Ripper",
   "temp",
   "jack",
-  "Lorem ipsum...",
-  false
+  "As a Aquarius, you are lorem ipsum...",
+  false,
+  "Jan 20 - Feb 18"
 );
 const oph = new sign(
   "Ophiuchus",
   "The Zodiac Killer",
   "temp",
   "zodiac",
-  "Lorem ipsum...",
-  false
+  "As a Ophiuchus, you are lorem ipsum...",
+  false,
+  "NaN - NaN"
 );
 const nan = new sign(
   "",
@@ -203,11 +217,14 @@ const nan = new sign(
   "",
   "",
   "",
-  false
+  false,
+  ""
 );
-const signs = [aqu, pis, ari, tau, gem, can, leo, vir, lib, sco, sag, cap]
+var signs = [aqu, pis, ari, tau, gem, can, leo, vir, lib, sco, sag, cap];
 
 function submit(dob) {
+  signs = [aqu, pis, ari, tau, gem, can, leo, vir, lib, sco, sag, cap];
+
   $(".starting-content").addClass("fade-out");
   $(".on-click-content").addClass("fade-in-no-delay");
   $(".title").addClass("move-up");
@@ -233,17 +250,18 @@ function submit(dob) {
     userSign = nan;
   }
 
-  var ch = $('.gridbox').height();
-  $('.gridbox').css({'width': ch + 'px'});
+  var ch = $('#grd-zodiac-wheel').height();
+  $('#grd-zodiac-wheel').css({'width': ch + 'px'});
 
   signs.forEach(function(sign) {
     const signBtn = makeSignBtn(sign);
     signBtn.addEventListener("click", function() {
-        document.getElementsByClassName("gridbox")[0].classList.add("push-left");
+        document.getElementById("grd-zodiac-wheel").classList.add("push-left");
         sign.isSelected = true;
         document.getElementById(`btn-${sign.starsign}`).classList.add("is-selected");
         document.getElementById(`btn-${sign.starsign}`).classList.remove("sign");
-        document.getElementsByClassName("sign-name")[0].innerHTML = sign.starsign.toUpperCase();
+        document.getElementById("sign-name").innerHTML = sign.starsign.toUpperCase();
+        document.getElementById("sign-dates").innerHTML = sign.dates.toUpperCase();
         document.getElementsByClassName("criminal-name")[0].innerHTML = sign.name.toUpperCase();
         signs.forEach(function(tempSign) {
           if (tempSign != sign) {
@@ -260,22 +278,23 @@ function submit(dob) {
         else {
           rotate = rotate + (-30 * (12 - signs.indexOf(lastSel)));
         }
-        document.getElementsByClassName("sign-info")[0].style.transform = `rotate(${-rotate}deg)`;
-        document.getElementById("grd-01").style.transform = `translate(-110%, -42%) rotate(${rotate}deg)`;
+        document.getElementsByClassName("sign-title")[0].style.transform = `rotate(${-rotate}deg)`;
+        document.getElementById("grd-zodiac-wheel").style.transform = `translate(-110%, -44%) rotate(${rotate}deg)`;
         signs.forEach(function(curSign) {
           document.getElementById(`btn-${curSign.starsign}`).style.transform = `rotate(${-rotate}deg)`;
           document.getElementById(`btn-${curSign.starsign}`).style.transition = "0.75s ease";
         });
       }, false);
     counter+=1;
-    document.getElementsByClassName("gridbox")[0].append(signBtn);
+    document.getElementById("grd-zodiac-wheel").append(signBtn);
   });
 
   if (dob == 1) {
-    document.getElementsByClassName("gridbox")[0].classList.add("push-left");
+    document.getElementById("grd-zodiac-wheel").classList.add("push-left");
     document.getElementById(`btn-${signs[0].starsign}`).classList.add("is-selected");
     document.getElementById(`btn-${signs[0].starsign}`).classList.remove("sign");
-    document.getElementsByClassName("sign-name")[0].innerHTML = signs[0].starsign.toUpperCase();
+    document.getElementById("sign-name").innerHTML = signs[0].starsign.toUpperCase();
+    document.getElementById("sign-dates").innerHTML = signs[0].dates.toUpperCase();
     document.getElementsByClassName("criminal-name")[0].innerHTML = signs[0].name.toUpperCase();
   }
 }

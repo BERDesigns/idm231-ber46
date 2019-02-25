@@ -148,30 +148,33 @@ html {
 }
 
 .gridbox {
+  display: grid;
+
+  margin: auto;
+
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+#grd-zodiac-wheel {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-42%);
+    transform: translate(-50%,-44%);
 
     text-align: center;
 
-    margin: auto;
-
     height: 80%;
 
-    display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-template-areas:
         ". btn-11 btn-0 btn-1 ."
-        "btn-10 sign-info sign-info sign-info btn-2"
-        "btn-9 sign-info sign-info sign-info btn-3"
-        "btn-8 sign-info sign-info sign-info btn-4"
+        "btn-10 sign-title sign-title sign-title btn-2"
+        "btn-9 sign-title sign-title sign-title btn-3"
+        "btn-8 sign-title sign-title sign-title btn-4"
         ". btn-7 btn-6 btn-5 .";
-
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
 
     transition: 0.75s ease;
 }
@@ -202,6 +205,8 @@ html {
   opacity: 0.8;
 
   filter: grayscale(25%);
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
 }
 
 .is-selected {
@@ -218,18 +223,26 @@ html {
 
   cursor: pointer;
 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
   transition: 0.3s;
 }
 
-.sign-info {
-  grid-area: sign-info;
+.sign-title {
+  grid-area: sign-title;
   transition: 0.75s ease;
   margin: 0;
   padding: 0;
 }
 
-.sign-name {
+#sign-name {
   font-size: 200%;
+  margin: 0;
+  padding: 0;
+}
+
+#sign-dates {
+  font-size: 150%;
   margin: 0;
   padding: 0;
 }
@@ -242,35 +255,35 @@ html {
 }
 
 #btn-11 {
-  transform: translateY(25%);
+  transform: translateY(30%);
 }
 
 #btn-1 {
-  transform: translateY(25%);
+  transform: translateY(30%);
 }
 
 #btn-2 {
-  transform: translateX(-25%);
+  transform: translateX(-30%);
 }
 
 #btn-4 {
-  transform: translateX(-25%);
+  transform: translateX(-30%);
 }
 
 #btn-5 {
-  transform: translateY(-25%);
+  transform: translateY(-30%);
 }
 
 #btn-7 {
-  transform: translateY(-25%);
+  transform: translateY(-30%);
 }
 
 #btn-8 {
-  transform: translateX(25%);
+  transform: translateX(30%);
 }
 
 #btn-10 {
-  transform: translateX(25%);
+  transform: translateX(30%);
 }
 
 .push-left {
