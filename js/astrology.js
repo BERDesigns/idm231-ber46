@@ -226,10 +226,14 @@ function submit(dob) {
   signs = [aqu, pis, ari, tau, gem, can, leo, vir, lib, sco, sag, cap];
 
   $(".starting-content").addClass("fade-out");
-  $(".on-click-content").addClass("fade-in-no-delay");
+  $(".on-click-content").addClass("fade-in-short-delay");
   $(".title").addClass("move-up");
 
   if(dob == 1) {
+    document.getElementById("grd-zodiac-wheel").style.transform = "translate(-110%, -44%)";
+    document.getElementById("grd-zodiac-wheel").classList.add("push-left");
+    $(".followup-content").addClass("fade-in-short-delay");
+
     userMonth = parseInt($("#month-list").val());
     userDay = parseInt($("#day-select").val());
     userSign = getSign(userMonth, userDay);
@@ -256,13 +260,15 @@ function submit(dob) {
   signs.forEach(function(sign) {
     const signBtn = makeSignBtn(sign);
     signBtn.addEventListener("click", function() {
+        $(".followup-content").addClass("fade-in-no-delay");
         document.getElementById("grd-zodiac-wheel").classList.add("push-left");
         sign.isSelected = true;
         document.getElementById(`btn-${sign.starsign}`).classList.add("is-selected");
         document.getElementById(`btn-${sign.starsign}`).classList.remove("sign");
         document.getElementById("sign-name").innerHTML = sign.starsign.toUpperCase();
         document.getElementById("sign-dates").innerHTML = sign.dates.toUpperCase();
-        document.getElementsByClassName("criminal-name")[0].innerHTML = sign.name.toUpperCase();
+        document.getElementById("sign-desc").innerHTML = sign.description.toUpperCase();
+        document.getElementById("criminal-name").innerHTML = sign.name.toUpperCase();
         signs.forEach(function(tempSign) {
           if (tempSign != sign) {
             tempSign.isSelected = false;
@@ -295,9 +301,45 @@ function submit(dob) {
     document.getElementById(`btn-${signs[0].starsign}`).classList.remove("sign");
     document.getElementById("sign-name").innerHTML = signs[0].starsign.toUpperCase();
     document.getElementById("sign-dates").innerHTML = signs[0].dates.toUpperCase();
-    document.getElementsByClassName("criminal-name")[0].innerHTML = signs[0].name.toUpperCase();
+    document.getElementById("sign-desc").innerHTML = signs[0].description.toUpperCase();
+    document.getElementById("criminal-name").innerHTML = signs[0].name.toUpperCase();
   }
 }
+
+function animatedText(target, texts, changeInterval, updateInterval, onTextChanged) {
+  var currentText=parseInt(Math.random()*texts.length);
+  var areaText=texts[0];
+  this.t1=setInterval(function(){
+    var c=parseInt(Math.random()*Math.max(texts[currentText].length,
+      areaText.length));
+    var s=texts[currentText][c];
+    if(typeof s == "undefined") {
+      s=" ";
+    }
+    while(areaText.length<c) {
+      areaText+=" ";
+    }
+    var newText=(areaText.slice(0,c)+s+areaText.slice(c+1)).trim();
+    var diff=!(newText==areaText);
+    areaText=newText;
+    if(onTextChanged && diff) {
+      onTextChanged();
+    }
+    target.innerHTML=areaText.length==0?"&nbsp;":areaText;
+  }.bind(this),updateInterval?updateInterval:50);
+  this.t2=setInterval(function(){
+    currentText=parseInt(Math.random()*texts.length);
+  }.bind(this),changeInterval?changeInterval:1);
+}
+animatedText.prototype={
+  constructor:animatedText,
+  stop:function(){clearInterval(this.t1);clearInterval(this.t2);}
+};
+
+new animatedText(document.getElementById("ber"), []);
+new animatedText(document.getElementById("ber"), []);
+new animatedText(document.getElementById("ber"), []);
+new animatedText(document.getElementById("ber"), []);
 
 document.getElementById("submit-btn").addEventListener("click", function() {
     submit(1);

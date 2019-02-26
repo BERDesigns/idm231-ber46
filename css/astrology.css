@@ -7,8 +7,7 @@ html {
 
   background-color: #000;
 
-
-  animation: background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
+  animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
 
   font-family: "futura-pt" !important;
   color: rgba(var(--title-color), 1);
@@ -41,8 +40,12 @@ html {
   animation: fade-in 1s linear 7s both;
 }
 
-.fade-in-no-delay {
+.fade-in-short-delay {
   animation: fade-in 1s linear 2s both;
+}
+
+.fade-in-no-delay {
+  animation: fade-in 1s linear both;
 }
 
 .fade-out {
@@ -147,6 +150,10 @@ html {
   opacity: 0;
 }
 
+.followup-content {
+  opacity: 0;
+}
+
 .gridbox {
   display: grid;
 
@@ -247,7 +254,7 @@ html {
   padding: 0;
 }
 
-.criminal-name {
+#criminal-name {
   font-family: "futura-pt-bold" !important;
   font-size: 400%;
   margin: 0;
@@ -284,6 +291,44 @@ html {
 
 #btn-10 {
   transform: translateX(30%);
+}
+
+#sign-info {
+  position: fixed;
+  top: 50%;
+  left: 45vw;
+
+  z-index: -5;
+
+  transform: translateY(-30%);
+
+  text-align: center;
+
+  height: 87.5vh;
+  width: 55vw;
+
+  grid-template-rows: 60% 1fr;
+  grid-template-areas:
+      "desc"
+      "restart";
+
+  transition: 0.75s ease;
+}
+
+#restart-btn {
+  grid-area: restart;
+  align-self: start;
+
+  font-size: 125%;
+  padding: 1vh 1.5vw;
+}
+
+#sign-desc {
+  font-size: 200%;
+  margin: 5%;
+  padding: 10%;
+
+  grid-area: desc;
 }
 
 .push-left {
