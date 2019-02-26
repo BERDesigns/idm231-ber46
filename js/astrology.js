@@ -180,7 +180,7 @@ const ari = new sign(
   "Al Capone",
   "temp",
   "capone",
-  "As a Aries, you are lorem ipsum...",
+  "As an Aries, you are lorem ipsum...",
   false,
   "Mar 21 - Apr 19"
 );
@@ -198,7 +198,7 @@ const aqu = new sign(
   "Jack the Ripper",
   "temp",
   "jack",
-  "As a Aquarius, you are lorem ipsum...",
+  "As an Aquarius, you are lorem ipsum...",
   false,
   "Jan 20 - Feb 18"
 );
@@ -207,7 +207,7 @@ const oph = new sign(
   "The Zodiac Killer",
   "temp",
   "zodiac",
-  "As a Ophiuchus, you are lorem ipsum...",
+  "As an Ophiuchus, you are lorem ipsum...",
   false,
   "NaN - NaN"
 );
@@ -267,7 +267,7 @@ function submit(dob) {
         document.getElementById(`btn-${sign.starsign}`).classList.remove("sign");
         document.getElementById("sign-name").innerHTML = sign.starsign.toUpperCase();
         document.getElementById("sign-dates").innerHTML = sign.dates.toUpperCase();
-        document.getElementById("sign-desc").innerHTML = sign.description.toUpperCase();
+        document.getElementById("sign-desc").innerHTML = sign.description;
         document.getElementById("criminal-name").innerHTML = sign.name.toUpperCase();
         signs.forEach(function(tempSign) {
           if (tempSign != sign) {
@@ -301,7 +301,7 @@ function submit(dob) {
     document.getElementById(`btn-${signs[0].starsign}`).classList.remove("sign");
     document.getElementById("sign-name").innerHTML = signs[0].starsign.toUpperCase();
     document.getElementById("sign-dates").innerHTML = signs[0].dates.toUpperCase();
-    document.getElementById("sign-desc").innerHTML = signs[0].description.toUpperCase();
+    document.getElementById("sign-desc").innerHTML = signs[0].description;
     document.getElementById("criminal-name").innerHTML = signs[0].name.toUpperCase();
   }
 }
