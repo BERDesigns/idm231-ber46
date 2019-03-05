@@ -307,20 +307,13 @@ html {
   height: 87.5vh;
   width: 55vw;
 
-  grid-template-rows: 60% 1fr;
+  grid-template-rows: 60% 1fr 2fr;
   grid-template-areas:
       "desc"
+      "new-date"
       "restart";
 
   transition: 0.75s ease;
-}
-
-#restart-btn {
-  grid-area: restart;
-  align-self: start;
-
-  font-size: 125%;
-  padding: 1vh 1.5vw;
 }
 
 #sign-desc {
@@ -333,4 +326,50 @@ html {
 
 .push-left {
   transform: translate(-110%, -42%);
+}
+
+#new-date {
+  grid-area: new-date;
+  font-size: 125%;
+  align-self: end;
+}
+
+#restart-form {
+  grid-area: restart;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+
+  z-index: 10;
+  width: 30rem;
+
+  align-self: start;
+}
+
+#month-restart-list {
+  padding: 5px 5px 5px 10px;
+  background: rgba(var(--title-color), 0.8);
+  border: rgba(var(--title-color), 0.3);
+  border-radius: 50px;
+  width: 60%;
+  margin-right: 5%;
+
+  overflow: hidden;
+  position: relative;
+}
+
+#day-restart-select {
+  padding: 5px 5px 5px 10px;
+  background: rgba(var(--title-color), 0.8);
+  border: rgba(var(--title-color), 0.3);
+  border-radius: 50px;
+  width: 60%;
+
+  overflow: hidden;
+}
+
+#resubmit-btn {
+  margin-left: 5%;
+  font-size: 100%;
 }

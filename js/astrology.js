@@ -62,13 +62,17 @@ function sign(starsign, name, sound, image, description, isSelected, dates) {
 this.starsign = starsign;
   this.name = name;
   this.sound = `sounds/${sound}.mp3`;
-  //this.image = "icons/nan-test.png";
   this.image = `icons/${image}.png`;
   this.description = description;
   this.isSelected = false;
   this.dates = dates;
+  var audio = new Audio(this.sound);
   this.playSound = function() {
-    console.log("playSound running correctly for "+name);
+    audio.play();
+  };
+  this.stopSound = function() {
+    audio.load();
+    audio.pause();
   };
 }
 
@@ -97,25 +101,25 @@ function makeSignBtn(sign) {
 const cap = new sign(
   "Capricorn",
   "H.H. Holmes",
-  "temp",
   "holmes",
-  "As a Capricorn, you are lorem ipsum...",
+  "holmes",
+  "As a Capricorn, you tend to be smart, hardworking, and will always get whatever you set your mind to. Whether that is conning people out of thousands of dollars, or murdering 27 people in a \"Murder Hotel\", you always put your best foot forward and accomplish your goals! You can think outside of the box, but you prefer to have strict boundaries to constrain against, just like the strict boundaries of a building designed to trap victims for days before their inevitable death.",
   false,
   "Dec 22 - Jan 19"
 );
 const sag = new sign(
   "Sagittarius",
   "John Gotti",
-  "temp",
   "gotti",
-  "As a Sagittarius, you are lorem ipsum...",
+  "gotti",
+  "As a Sagittarius, you are generous and idealistic, but can be very impacient at times. Though that may lead to you __, you don't let that bring you down! You always land on your feet, though that may involve a certain person or 2 \"going away for a while\".",
   false,
   "Nov 22 - Dec 21"
 );
 const sco = new sign(
   "Scorpio",
   "Dragan Mikic",
-  "temp",
+  "mikic",
   "mikic",
   "Leader of The Pink Panthers.",
   false,
@@ -124,7 +128,7 @@ const sco = new sign(
 const lib = new sign(
   "Libra",
   "Jim Jones",
-  "temp",
+  "jones",
   "jones",
   "As a Libra, you are lorem ipsum...",
   false,
@@ -133,7 +137,7 @@ const lib = new sign(
 const vir = new sign(
   "Virgo",
   "Belle Gunness",
-  "temp",
+  "gunness",
   "gunness",
   "As a Virgo, you are lorem ipsum...",
   false,
@@ -142,7 +146,7 @@ const vir = new sign(
 const leo = new sign(
   "Leo",
   "Peter Salerno",
-  "temp",
+  "salerno",
   "salerno",
   "Leader of The Dinner Set Gang.",
   false,
@@ -151,7 +155,7 @@ const leo = new sign(
 const can = new sign(
   "Cancer",
   "Billy the Kid",
-  "temp",
+  "kid",
   "kid",
   "As a Cancer, you are lorem ipsum...",
   false,
@@ -160,7 +164,7 @@ const can = new sign(
 const gem = new sign(
   "Gemini",
   "Bonnie & Clyde",
-  "temp",
+  "bac",
   "bac",
   "As a Gemini, you are lorem ipsum...",
   false,
@@ -169,7 +173,7 @@ const gem = new sign(
 const tau = new sign(
   "Taurus",
   "Alice Diamond",
-  "temp",
+  "diamond",
   "diamond",
   "Leader of the Fourty Elephants.",
   false,
@@ -178,7 +182,7 @@ const tau = new sign(
 const ari = new sign(
   "Aries",
   "Al Capone",
-  "temp",
+  "capone",
   "capone",
   "As an Aries, you are lorem ipsum...",
   false,
@@ -187,7 +191,7 @@ const ari = new sign(
 const pis = new sign(
   "Pisces",
   "Charles Manson",
-  "temp",
+  "manson",
   "manson",
   "As a Pisces, you are lorem ipsum...",
   false,
@@ -196,7 +200,7 @@ const pis = new sign(
 const aqu = new sign(
   "Aquarius",
   "Jack the Ripper",
-  "temp",
+  "jack",
   "jack",
   "As an Aquarius, you are lorem ipsum...",
   false,
@@ -205,7 +209,7 @@ const aqu = new sign(
 const oph = new sign(
   "Ophiuchus",
   "The Zodiac Killer",
-  "temp",
+  "zodiac",
   "zodiac",
   "As an Ophiuchus, you are lorem ipsum...",
   false,
@@ -247,6 +251,7 @@ function submit(dob) {
     shiftArrayToRight(signs, 12-signs.indexOf(userSign));
 
     signs[0].isSelected = true;
+    setTimeout(function(){ signs[0].playSound(); }, 2000);
   }
   else {
     userMonth = 1;
@@ -269,9 +274,11 @@ function submit(dob) {
         document.getElementById("sign-dates").innerHTML = sign.dates.toUpperCase();
         document.getElementById("sign-desc").innerHTML = sign.description;
         document.getElementById("criminal-name").innerHTML = sign.name.toUpperCase();
+        sign.playSound();
         signs.forEach(function(tempSign) {
           if (tempSign != sign) {
             tempSign.isSelected = false;
+            tempSign.stopSound();
             document.getElementById(`btn-${tempSign.starsign}`).classList.add("sign");
             document.getElementById(`btn-${tempSign.starsign}`).classList.remove("is-selected");
           }
@@ -290,6 +297,7 @@ function submit(dob) {
           document.getElementById(`btn-${curSign.starsign}`).style.transform = `rotate(${-rotate}deg)`;
           document.getElementById(`btn-${curSign.starsign}`).style.transition = "0.75s ease";
         });
+        document.getElementById(`btn-${sign.starsign}`).style.transform += "scale(1.3)";
       }, false);
     counter+=1;
     document.getElementById("grd-zodiac-wheel").append(signBtn);
@@ -306,40 +314,89 @@ function submit(dob) {
   }
 }
 
-function animatedText(target, texts, changeInterval, updateInterval, onTextChanged) {
-  var currentText=parseInt(Math.random()*texts.length);
-  var areaText=texts[0];
-  this.t1=setInterval(function(){
-    var c=parseInt(Math.random()*Math.max(texts[currentText].length,
-      areaText.length));
-    var s=texts[currentText][c];
-    if(typeof s == "undefined") {
-      s=" ";
-    }
-    while(areaText.length<c) {
-      areaText+=" ";
-    }
-    var newText=(areaText.slice(0,c)+s+areaText.slice(c+1)).trim();
-    var diff=!(newText==areaText);
-    areaText=newText;
-    if(onTextChanged && diff) {
-      onTextChanged();
-    }
-    target.innerHTML=areaText.length==0?"&nbsp;":areaText;
-  }.bind(this),updateInterval?updateInterval:50);
-  this.t2=setInterval(function(){
-    currentText=parseInt(Math.random()*texts.length);
-  }.bind(this),changeInterval?changeInterval:1);
-}
-animatedText.prototype={
-  constructor:animatedText,
-  stop:function(){clearInterval(this.t1);clearInterval(this.t2);}
-};
+function resubmit() {
+  var lastSel = signs[0];
 
-new animatedText(document.getElementById("ber"), []);
-new animatedText(document.getElementById("ber"), []);
-new animatedText(document.getElementById("ber"), []);
-new animatedText(document.getElementById("ber"), []);
+  userMonth = parseInt($("#month-restart-list").val());
+  userDay = parseInt($("#day-restart-select").val());
+  userSign = getSign(userMonth, userDay);
+
+  if (eval(userSign) == oph) {
+    signs[0] = oph;
+  }
+
+  userSign = eval(userSign);
+
+  shiftArrayToRight(signs, 12-signs.indexOf(userSign));
+
+  signs[0].isSelected = true;
+
+  document.getElementById(`btn-${signs[0].starsign}`).classList.add("is-selected");
+  document.getElementById(`btn-${signs[0].starsign}`).classList.remove("sign");
+  document.getElementById("sign-name").innerHTML = signs[0].starsign.toUpperCase();
+  document.getElementById("sign-dates").innerHTML = signs[0].dates.toUpperCase();
+  document.getElementById("sign-desc").innerHTML = signs[0].description;
+  document.getElementById("criminal-name").innerHTML = signs[0].name.toUpperCase();
+  signs[0].playSound();
+  signs.forEach(function(tempSign) {
+    if (tempSign != signs[0]) {
+      tempSign.isSelected = false;
+      tempSign.stopSound();
+      document.getElementById(`btn-${tempSign.starsign}`).classList.add("sign");
+      document.getElementById(`btn-${tempSign.starsign}`).classList.remove("is-selected");
+    }
+  });
+
+  if (signs.indexOf(lastSel) <= 6) {
+    rotate = rotate + (30 * signs.indexOf(lastSel));
+  }
+  else {
+    rotate = rotate + (-30 * (12 - signs.indexOf(lastSel)));
+  }
+  document.getElementsByClassName("sign-title")[0].style.transform = `rotate(${-rotate}deg)`;
+  document.getElementById("grd-zodiac-wheel").style.transform = `translate(-110%, -44%) rotate(${rotate}deg)`;
+  signs.forEach(function(curSign) {
+    document.getElementById(`btn-${curSign.starsign}`).style.transform = `rotate(${-rotate}deg)`;
+    document.getElementById(`btn-${curSign.starsign}`).style.transition = "0.75s ease";
+  });
+  document.getElementById(`btn-${signs[0].starsign}`).style.transform += "scale(1.3)";
+  console.log(signs[0]);
+}
+
+// function animatedText(target, texts, changeInterval, updateInterval, onTextChanged) {
+//   var currentText=parseInt(Math.random()*texts.length);
+//   var areaText=texts[0];
+//   this.t1=setInterval(function(){
+//     var c=parseInt(Math.random()*Math.max(texts[currentText].length,
+//       areaText.length));
+//     var s=texts[currentText][c];
+//     if(typeof s == "undefined") {
+//       s=" ";
+//     }
+//     while(areaText.length<c) {
+//       areaText+=" ";
+//     }
+//     var newText=(areaText.slice(0,c)+s+areaText.slice(c+1)).trim();
+//     var diff=!(newText==areaText);
+//     areaText=newText;
+//     if(onTextChanged && diff) {
+//       onTextChanged();
+//     }
+//     target.innerHTML=areaText.length==0?"&nbsp;":areaText;
+//   }.bind(this),updateInterval?updateInterval:50);
+//   this.t2=setInterval(function(){
+//     currentText=parseInt(Math.random()*texts.length);
+//   }.bind(this),changeInterval?changeInterval:1);
+// }
+// animatedText.prototype={
+//   constructor:animatedText,
+//   stop:function(){clearInterval(this.t1);clearInterval(this.t2);}
+// };
+//
+// new animatedText(document.getElementById("ber"), []);
+// new animatedText(document.getElementById("ber"), []);
+// new animatedText(document.getElementById("ber"), []);
+// new animatedText(document.getElementById("ber"), []);
 
 document.getElementById("submit-btn").addEventListener("click", function() {
     submit(1);
@@ -349,3 +406,4 @@ document.getElementById("explore-btn").addEventListener("click", function() {
     submit(0);
     document.getElementsByClassName("on-click-content")[0].style.display = "";
   }, false);
+document.getElementById("resubmit-btn").addEventListener("click", resubmit, false);

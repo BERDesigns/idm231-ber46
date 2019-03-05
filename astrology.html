@@ -56,7 +56,25 @@
     </div>
     <div class="followup-content gridbox" id="sign-info">
       <p id="sign-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <a href="astrology.html" class="btn" id="restart-btn">RESTART</a>
+      <p id="new-date"> PICK A NEW DATE:</p>
+      <div id="restart-form" class="child grid">
+        <select id = "month-restart-list">
+          <option value = "1">JAN</option>
+          <option value = "2">FEB</option>
+          <option value = "3">MAR</option>
+          <option value = "4">APR</option>
+          <option value = "5">MAY</option>
+          <option value = "6">JUN</option>
+          <option value = "7">JUL</option>
+          <option value = "8">AUG</option>
+          <option value = "9">SEP</option>
+          <option value = "10">OCT</option>
+          <option value = "11">NOV</option>
+          <option value = "12">DEC</option>
+        </select>
+        <input type="number" id="day-restart-select" name="day-select" value="1" min="1" max="31">
+        <a href="#" class="btn" id="resubmit-btn">SUBMIT</a>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src = "js/astrology.js"></script>
