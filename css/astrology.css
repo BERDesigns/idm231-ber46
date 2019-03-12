@@ -5,9 +5,11 @@ html {
   --title-color: 240, 240, 240;
   --title-depth-color: 176, 176, 176;
 
-  background-color: #000;
+  background-color: #000000 !important;
 
-  animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
+  -webkit-animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
+
+          animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
 
   font-family: "futura-pt" !important;
   color: rgba(var(--title-color), 1);
@@ -25,7 +27,9 @@ html {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
 
   text-align: center;
 
@@ -33,27 +37,33 @@ html {
 }
 
 .text-flicker-and-push {
-	animation: text-flicker-in-glow 4s linear 1s both, text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 5.5s both;
+	-webkit-animation: text-flicker-in-glow 4s linear 1s both, text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 5.5s both;
+	        animation: text-flicker-in-glow 4s linear 1s both, text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 5.5s both;
 }
 
 .fade-in {
-  animation: fade-in 1s linear 7s both;
+  -webkit-animation: fade-in 1s linear 7s both;
+          animation: fade-in 1s linear 7s both;
 }
 
 .fade-in-short-delay {
-  animation: fade-in 1s linear 2s both;
+  -webkit-animation: fade-in 1s linear 2s both;
+          animation: fade-in 1s linear 2s both;
 }
 
 .fade-in-no-delay {
-  animation: fade-in 1s linear both;
+  -webkit-animation: fade-in 1s linear both;
+          animation: fade-in 1s linear both;
 }
 
 .fade-out {
-  animation: fade-out 1s linear 0.5s both;
+  -webkit-animation: fade-out 1s linear 0.5s both;
+          animation: fade-out 1s linear 0.5s both;
 }
 
 .move-up {
-  animation: push-upward 1s linear 0.3s both;
+  -webkit-animation: push-upward 1s linear 0.3s both;
+          animation: push-upward 1s linear 0.3s both;
 }
 
 .child {
@@ -67,10 +77,17 @@ html {
 }
 
 #formbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-grow: 1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 
   width: 55%;
   height: 40%;
@@ -131,6 +148,10 @@ html {
   border-color: rgba(var(--title-color), 1);
   border-radius: 50px;
 
+  -webkit-transition: 0.5s ease;
+
+  -o-transition: 0.5s ease;
+
   transition: 0.5s ease;
 }
 
@@ -155,12 +176,19 @@ html {
 }
 
 .gridbox {
+  display: -ms-grid;
   display: grid;
 
   margin: auto;
 
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+
+      -ms-flex-align: center;
+
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   justify-items: center;
 }
 
@@ -168,20 +196,29 @@ html {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-44%);
+    -webkit-transform: translate(-50%,-44%);
+        -ms-transform: translate(-50%,-44%);
+            transform: translate(-50%,-44%);
 
     text-align: center;
 
     height: 80%;
 
+    -ms-grid-columns: (1fr)[5];
+
     grid-template-columns: repeat(5, 1fr);
+    -ms-grid-rows: (1fr)[5];
     grid-template-rows: repeat(5, 1fr);
-    grid-template-areas:
+        grid-template-areas:
         ". btn-11 btn-0 btn-1 ."
         "btn-10 sign-title sign-title sign-title btn-2"
         "btn-9 sign-title sign-title sign-title btn-3"
         "btn-8 sign-title sign-title sign-title btn-4"
         ". btn-7 btn-6 btn-5 .";
+
+    -webkit-transition: 0.75s ease;
+
+    -o-transition: 0.75s ease;
 
     transition: 0.75s ease;
 }
@@ -194,7 +231,9 @@ html {
   width: 100%;
   opacity: 0.5;
 
-  filter: grayscale(50%);
+  -webkit-filter: grayscale(50%);
+
+          filter: grayscale(50%);
 
   border: 5px solid #DDD;
   border-radius: 50%;
@@ -204,6 +243,10 @@ html {
 
   cursor: pointer;
 
+  -webkit-transition: 0.3s;
+
+  -o-transition: 0.3s;
+
   transition: 0.3s;
 }
 
@@ -211,16 +254,22 @@ html {
   border: 5px solid white;
   opacity: 0.8;
 
-  filter: grayscale(25%);
+  -webkit-filter: grayscale(25%);
 
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+          filter: grayscale(25%);
+
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
 }
 
 .is-selected {
   width: 100%;
   opacity: 1;
 
-  filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+
+          filter: grayscale(0%);
 
   border: 5px solid white;
   border-radius: 50%;
@@ -230,13 +279,25 @@ html {
 
   cursor: pointer;
 
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  -webkit-transition: 0.3s;
+
+  -o-transition: 0.3s;
 
   transition: 0.3s;
 }
 
 .sign-title {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 3;
   grid-area: sign-title;
+  -webkit-transition: 0.75s ease;
+  -o-transition: 0.75s ease;
   transition: 0.75s ease;
   margin: 0;
   padding: 0;
@@ -262,35 +323,51 @@ html {
 }
 
 #btn-11 {
-  transform: translateY(30%);
+  -webkit-transform: translateY(30%);
+      -ms-transform: translateY(30%);
+          transform: translateY(30%);
 }
 
 #btn-1 {
-  transform: translateY(30%);
+  -webkit-transform: translateY(30%);
+      -ms-transform: translateY(30%);
+          transform: translateY(30%);
 }
 
 #btn-2 {
-  transform: translateX(-30%);
+  -webkit-transform: translateX(-30%);
+      -ms-transform: translateX(-30%);
+          transform: translateX(-30%);
 }
 
 #btn-4 {
-  transform: translateX(-30%);
+  -webkit-transform: translateX(-30%);
+      -ms-transform: translateX(-30%);
+          transform: translateX(-30%);
 }
 
 #btn-5 {
-  transform: translateY(-30%);
+  -webkit-transform: translateY(-30%);
+      -ms-transform: translateY(-30%);
+          transform: translateY(-30%);
 }
 
 #btn-7 {
-  transform: translateY(-30%);
+  -webkit-transform: translateY(-30%);
+      -ms-transform: translateY(-30%);
+          transform: translateY(-30%);
 }
 
 #btn-8 {
-  transform: translateX(30%);
+  -webkit-transform: translateX(30%);
+      -ms-transform: translateX(30%);
+          transform: translateX(30%);
 }
 
 #btn-10 {
-  transform: translateX(30%);
+  -webkit-transform: translateX(30%);
+      -ms-transform: translateX(30%);
+          transform: translateX(30%);
 }
 
 #sign-info {
@@ -300,23 +377,35 @@ html {
 
   z-index: -5;
 
-  transform: translateY(-30%);
+  -webkit-transform: translateY(-30%);
+
+      -ms-transform: translateY(-30%);
+
+          transform: translateY(-30%);
 
   text-align: center;
 
   height: 87.5vh;
   width: 55vw;
 
+  -ms-grid-rows: 60% 1fr 2fr;
+
   grid-template-rows: 60% 1fr 2fr;
-  grid-template-areas:
+      grid-template-areas:
       "desc"
       "new-date"
       "restart";
+
+  -webkit-transition: 0.75s ease;
+
+  -o-transition: 0.75s ease;
 
   transition: 0.75s ease;
 }
 
 #sign-desc {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
   font-size: 200%;
   margin: 5%;
   padding: 10%;
@@ -325,26 +414,43 @@ html {
 }
 
 .push-left {
-  transform: translate(-110%, -42%);
+  -webkit-transform: translate(-110%, -42%);
+      -ms-transform: translate(-110%, -42%);
+          transform: translate(-110%, -42%);
 }
 
 #new-date {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
   grid-area: new-date;
   font-size: 125%;
-  align-self: end;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
 }
 
 #restart-form {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
   grid-area: restart;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-grow: 1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 
   z-index: 10;
   width: 30rem;
 
-  align-self: start;
+  -ms-flex-item-align: start;
+
+      align-self: start;
 }
 
 #month-restart-list {
@@ -352,7 +458,7 @@ html {
   background: rgba(var(--title-color), 0.8);
   border: rgba(var(--title-color), 0.3);
   border-radius: 50px;
-  width: 60%;
+  width: 25%;
   margin-right: 5%;
 
   overflow: hidden;
@@ -364,7 +470,7 @@ html {
   background: rgba(var(--title-color), 0.8);
   border: rgba(var(--title-color), 0.3);
   border-radius: 50px;
-  width: 60%;
+  width: 25%;
 
   overflow: hidden;
 }
