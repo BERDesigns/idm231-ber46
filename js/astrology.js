@@ -59,7 +59,7 @@ function getSign(month, day) {
 }
 
 function sign(starsign, name, sound, image, description, isSelected, dates) {
-this.starsign = starsign;
+  this.starsign = starsign;
   this.name = name;
   this.sound = `sounds/${sound}.wav`;
   this.image = `img/icons/${image}.png`;
@@ -366,6 +366,19 @@ function resubmit() {
   }
 }
 
+function skipSplash() {
+  document.getElementById("skip-btn").classList.remove("fade-out-with-delay");
+  document.getElementById("skip-btn").classList.add("fade-out");
+  var fadeIns  = document.getElementsByClassName("fade-in");
+  for (var i = 0; i < fadeIns.length; i++) {
+    fadeIns[i].classList.add("fade-in-crazy-short-delay");
+  }
+  document.getElementById("nefa-title").classList.remove("text-flicker-and-push");
+  document.getElementById("nefa-title").classList.add("text-push");
+  document.getElementById("background-gradient").classList.remove("background-animation");
+  document.getElementById("background-gradient").classList.add("background-skip-animation");
+}
+
 // function animatedText(target, texts, changeInterval, updateInterval, onTextChanged) {
 //   var currentText=parseInt(Math.random()*texts.length);
 //   var areaText=texts[0];
@@ -410,3 +423,5 @@ document.getElementById("explore-btn").addEventListener("click", function() {
     document.getElementsByClassName("on-click-content")[0].style.display = "";
   }, false);
 document.getElementById("resubmit-btn").addEventListener("click", resubmit, false);
+
+document.getElementById("skip-btn").addEventListener("click", skipSplash, false);

@@ -7,10 +7,6 @@ html {
 
   background-color: #000000 !important;
 
-  -webkit-animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
-
-          animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
-
   font-family: "futura-pt" !important;
   color: rgba(var(--title-color), 1);
   font-size: 100%;
@@ -36,6 +32,21 @@ html {
   margin: auto;
 }
 
+.background-animation {
+  -webkit-animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
+          animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
+}
+
+.background-skip-animation {
+  -webkit-animation:  background-strike-on 1s linear 0.5s both, gradient 30s ease infinite;
+          animation:  background-strike-on 1s linear 0.5s both, gradient 30s ease infinite;
+}
+
+.text-push {
+  -webkit-animation: text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+	        animation: text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+}
+
 .text-flicker-and-push {
 	-webkit-animation: text-flicker-in-glow 4s linear 1s both, text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 5.5s both;
 	        animation: text-flicker-in-glow 4s linear 1s both, text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 5.5s both;
@@ -51,6 +62,11 @@ html {
           animation: fade-in 1s linear 2s both;
 }
 
+.fade-in-crazy-short-delay {
+  -webkit-animation: fade-in 1s linear 0.5s both;
+          animation: fade-in 1s linear 0.5s both;
+}
+
 .fade-in-no-delay {
   -webkit-animation: fade-in 1s linear both;
           animation: fade-in 1s linear both;
@@ -59,6 +75,11 @@ html {
 .fade-out {
   -webkit-animation: fade-out 1s linear 0.5s both;
           animation: fade-out 1s linear 0.5s both;
+}
+
+.fade-out-with-delay {
+  -webkit-animation: fade-out 1s linear 7s both;
+          animation: fade-out 1s linear 7s both;
 }
 
 .move-up {
@@ -478,4 +499,43 @@ html {
 #resubmit-btn {
   margin-left: 5%;
   font-size: 100%;
+}
+
+#skip-btn {
+  width: 2%;
+  position: absolute;
+  right: 1%;
+  top: 2%;
+
+  cursor: pointer;
+}
+
+.background {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  padding: 0;
+  margin: 0;
+
+  position: absolute;
+  overflow: hidden;
+
+  z-index: -5;
+}
+
+.overflow-helper {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  padding: 0;
+  margin: 0;
+
+  position: absolute;
+  overflow: hidden;
+
+  z-index: -100;
 }
