@@ -1,3 +1,55 @@
+/*
+
+    ==================
+    GENERAL ANIMATIONS
+    ==================
+
+*/
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*
+
+    ====================
+    TITLE TXT ANIMATIONS
+    ====================
+
+*/
+
 @-webkit-keyframes text-flicker-in-glow {
   0% {
     opacity: 0;
@@ -276,66 +328,6 @@
   }
 }
 
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
 @-webkit-keyframes push-upward {
   0% {
     -webkit-transform: translate(-50%, 0%);
@@ -368,6 +360,38 @@
     font-size: 450%;
     text-shadow: 0 1px 0 rgba(var(--title-depth-color), 1), 0 2px 0 rgba(var(--title-depth-color), 1), 0 3px 0 rgba(var(--title-depth-color), 1), 0 4px 0 rgba(var(--title-depth-color), 1), 0 5px 0 rgba(var(--title-depth-color), 1), 0 6px 0 rgba(var(--title-depth-color), 1), 0 7px 0 rgba(var(--title-depth-color), 1), 0 8px 0 rgba(var(--title-depth-color), 1), 0 9px 0 rgba(var(--title-depth-color), 1), 0 30px 30px rgba(var(--title-color), 0.3);
   }
+}
+
+/*
+
+    =====================
+    BACKGROUND ANIMATIONS
+    =====================
+
+*/
+
+@-webkit-keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 @-webkit-keyframes background-strike-on {

@@ -32,6 +32,14 @@ html {
   margin: auto;
 }
 
+/*
+
+    ==========
+    ANIMATIONS
+    ==========
+
+*/
+
 .background-animation {
   -webkit-animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
           animation:  background-strike-on 4s linear 1.25s both, gradient 30s ease infinite;
@@ -90,6 +98,14 @@ html {
 .child {
   width: 45%;
 }
+
+/*
+
+    =================
+    INTRO PG ELEMENTS
+    =================
+
+*/
 
 #description-text {
   top: 8%;
@@ -191,6 +207,14 @@ html {
 .on-click-content {
   opacity: 0;
 }
+
+/*
+
+    ==================
+    ZODIAC PG ELEMENTS
+    ==================
+
+*/
 
 .followup-content {
   opacity: 0;
@@ -509,6 +533,14 @@ html {
 
   cursor: pointer;
 }
+
+/*
+
+    ===========================
+    GENERAL BCKGRND + CONTAINER
+    ===========================
+
+*/
 
 .background {
   top: 0;

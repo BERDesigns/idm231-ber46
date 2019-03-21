@@ -1,20 +1,29 @@
+//Initialize Global Varriables
 var userMonth = 0;
 var userDay = 0;
 var userSign = "nan";
-var counter = 0;
-var rotate = 0;
+var counter = 0; // Global counter, used for just counting from 0 to 12 when initializing the zodiac sign buttons.
+var rotate = 0; // The rotation degree, used for rotating the zodiac carousel later on.
 
+//Function: Rotate Elements in the Array by {pleaces} Places
 function shiftArrayToRight(arr, places) {
     for (var i = 0; i < places; i++) {
         arr.unshift(arr.pop());
     }
 }
 
+/*
+   EVERYTHING AFTER THIS POINT
+   RELATES TO INITIALIZING THE
+   STAR SIGN OBJECTS.
+*/
+
+//Function: Take month & day params to return the user's astrological sign.
 function getSign(month, day) {
   var sign = "nan";
   if (((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31) ||
   ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) || (month == 2 && day > 29) || (day < 1)) {
-    sign="oph";
+    sign="oph"; // If the user entered a day that doesn't exist, *easteregg* return Ophiuchus.
   }
   else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
     sign = "cap";
@@ -58,6 +67,7 @@ function getSign(month, day) {
   return sign;
 }
 
+//Function: Create sign Object for each astrological sign.
 function sign(starsign, name, sound, image, description, isSelected, dates) {
   this.starsign = starsign;
   this.name = name;
@@ -67,15 +77,19 @@ function sign(starsign, name, sound, image, description, isSelected, dates) {
   this.isSelected = false;
   this.dates = dates;
   var audio = new Audio(this.sound);
+  //Interior function to play the sign's sound file when called.
   this.playSound = function() {
     audio.play();
   };
+
+  //Interior function to stop the sign's sound file when called. Prevents multiple sounds from overlapping.
   this.stopSound = function() {
     audio.load();
     audio.pause();
   };
 }
 
+//Function: Create tangible button for {sign} Sign on HTML page.
 function makeSignBtn(sign) {
   const btn = document.createElement("a");
   btn.style.gridArea = `btn-${counter}`;
@@ -98,6 +112,7 @@ function makeSignBtn(sign) {
   return btn;
 }
 
+//Creating all 12 astrological signs as objects (so they're easily editable).
 const cap = new sign(
   "Capricorn",
   "H.H. Holmes",
@@ -224,16 +239,29 @@ const nan = new sign(
   false,
   ""
 );
+
+//Array to hold all of the signs.
 var signs = [aqu, pis, ari, tau, gem, can, leo, vir, lib, sco, sag, cap];
 
+/*
+   EVERYTHING AFTER THIS POINT
+   RELATES TO BINDING THE STAR
+   SIGNS TO THE HTML PG.
+*/
+
+//Function: What to do on "SUBMIT" event.
 function submit(dob) {
+  //Bring the signs array back to its initial state, just in case something causes it to shift prematurely.
   signs = [aqu, pis, ari, tau, gem, can, leo, vir, lib, sco, sag, cap];
 
+  //Hide all the starting content from the page.
   $(".starting-content").addClass("fade-out");
   $(".on-click-content").addClass("fade-in-short-delay");
   $(".title").addClass("move-up");
 
+  //Evaluates true if the "SUBMIT" button was clicked in the title pg, rather than the "EXPLORE" button.
   if(dob == 1) {
+    //Show all the secondary content.
     document.getElementById("grd-zodiac-wheel").style.transform = "translate(-110%, -44%)";
     document.getElementById("grd-zodiac-wheel").classList.add("push-left");
     $(".followup-content").addClass("fade-in-short-delay");
@@ -242,18 +270,21 @@ function submit(dob) {
     userDay = parseInt($("#day-select").val());
     userSign = getSign(userMonth, userDay);
 
+    //*easteregg*, replaces sign[0] (always Aquarius) with Ophiuchus on wheel until page is reloaded if the user entered an invalid date.
     if (eval(userSign) == oph) {
       signs[0] = oph;
-      document.getElementsByClassName("sign-title")[0].classList.add("glitch-holder");
+      document.getElementsByClassName("sign-title")[0].classList.add("glitch-holder"); //This does nothing right now. It was gonna have a glitchy effect but I removed that. Might re-add later.
     }
 
     userSign = eval(userSign);
 
+    //Shift the array so that userSign is the astrological sign @ signs[0].
     shiftArrayToRight(signs, 12-signs.indexOf(userSign));
 
     signs[0].isSelected = true;
     setTimeout(function(){ signs[0].playSound(); }, 2000);
   }
+  //Evaluates true if the "EXPLORE" button was clicked in the title pg, rather than the "SUBMIT" button.
   else {
     userMonth = 1;
     userDay = 1;
@@ -263,6 +294,7 @@ function submit(dob) {
   var ch = $('#grd-zodiac-wheel').height();
   $('#grd-zodiac-wheel').css({'width': ch + 'px'});
 
+  //Initializing Event Listeners for each of the signs.
   signs.forEach(function(sign) {
     const signBtn = makeSignBtn(sign);
     signBtn.addEventListener("click", function() {
@@ -277,6 +309,7 @@ function submit(dob) {
         document.getElementById("criminal-name").innerHTML = sign.name.toUpperCase();
         sign.playSound();
         signs.forEach(function(tempSign) {
+          //If the current sign is not the sign clicked on by the user, this evaluates True.
           if (tempSign != sign) {
             tempSign.isSelected = false;
             tempSign.stopSound();
@@ -284,14 +317,18 @@ function submit(dob) {
             document.getElementById(`btn-${tempSign.starsign}`).classList.remove("is-selected");
           }
         });
+        //Gets the previous sign clicked on by the user.
         var lastSel = signs[0];
+        //Shifts the array rightward to change signs[0] to the current sign clicked on by the user.
         shiftArrayToRight(signs, 12-signs.indexOf(sign));
+        //Using the difference between the previous sign and current sign the user selected, rotate the carousel.
         if (signs.indexOf(lastSel) <= 6) {
           rotate = rotate + (30 * signs.indexOf(lastSel));
         }
         else {
           rotate = rotate + (-30 * (12 - signs.indexOf(lastSel)));
         }
+        //Since the entire grid rotates, rotate the information in the opposite direction so it doesn't move.
         document.getElementsByClassName("sign-title")[0].style.transform = `rotate(${-rotate}deg)`;
         document.getElementById("grd-zodiac-wheel").style.transform = `translate(-110%, -44%) rotate(${rotate}deg)`;
         signs.forEach(function(curSign) {
@@ -300,10 +337,13 @@ function submit(dob) {
         });
         document.getElementById(`btn-${sign.starsign}`).style.transform += "scale(1.3)";
       }, false);
+    //Base global counter, starts at 0, ends at 11, and used to get the right element in signs array.
     counter+=1;
     document.getElementById("grd-zodiac-wheel").append(signBtn);
   });
 
+  //Evaluates true if the "SUBMIT" button was clicked in the title pg, rather than the "EXPLORE" button.
+  //Programatically, needs to run after the event listeners are configured to make sure the page displays correctly.
   if (dob == 1) {
     document.getElementById("grd-zodiac-wheel").classList.add("push-left");
     document.getElementById(`btn-${signs[0].starsign}`).style.transform += "scale(1.3)";
@@ -316,6 +356,8 @@ function submit(dob) {
   }
 }
 
+//Seperate function for if the user clicks the "SUBMIT" button that appears after the initial page.
+//Could possibly be amalgamated into the submit() function? Functions different enough, though, for me to just use this solution.
 function resubmit() {
   var lastSel = signs[0];
 
@@ -366,6 +408,7 @@ function resubmit() {
   }
 }
 
+//Function: Skip the splash screen animations, and just jump to the starting screen.
 function skipSplash() {
   document.getElementById("skip-btn").classList.remove("fade-out-with-delay");
   document.getElementById("skip-btn").classList.add("fade-out");
@@ -379,6 +422,8 @@ function skipSplash() {
   document.getElementById("background-gradient").classList.add("background-skip-animation");
 }
 
+//Testing for animated text function so that description changes on click between signs with a bit of flare.
+//Probably not gonna be implemented?
 // function animatedText(target, texts, changeInterval, updateInterval, onTextChanged) {
 //   var currentText=parseInt(Math.random()*texts.length);
 //   var areaText=texts[0];
@@ -414,12 +459,13 @@ function skipSplash() {
 // new animatedText(document.getElementById("ber"), []);
 // new animatedText(document.getElementById("ber"), []);
 
+//Event Listeners for Pre-existing HTML Elements
 document.getElementById("submit-btn").addEventListener("click", function() {
-    submit(1);
+    submit(1); //The 1 as the param coorelates to if the "SUBMIT" button pressed on the first pg.
     document.getElementsByClassName("on-click-content")[0].style.display = "";
   }, false);
 document.getElementById("explore-btn").addEventListener("click", function() {
-    submit(0);
+    submit(0);//The 0 as the param coorelates to if the "EXPLORE" button pressed on the first pg.
     document.getElementsByClassName("on-click-content")[0].style.display = "";
   }, false);
 document.getElementById("resubmit-btn").addEventListener("click", resubmit, false);
